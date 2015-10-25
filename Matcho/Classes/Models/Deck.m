@@ -39,8 +39,13 @@
 }
 
 - (Card *)drawRandomCard {
-	NSInteger randomCard = arc4random() % [self.cards count];
-	return self.cards[randomCard];
+    if (self.cards == nil || [self.cards count] == 0) {
+        return nil;
+    }
+    NSInteger randomIndex = arc4random() % [self.cards count];
+    Card *randomCard = self.cards[randomIndex];
+    [self.cards removeObject:randomCard];
+    return randomCard;
 }
 
 @end
