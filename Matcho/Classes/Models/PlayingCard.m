@@ -56,17 +56,21 @@
 
 
 -(int) match:(NSArray *)otherCards {
-	PlayingCard *card = [otherCards firstObject];
-	
-	if ([self.suit isEqualToString:card.suit]) {
-		return 1;
-	}
-	
-	if (self.rank == card.rank) {
-		return 4;
-	}
-	
-	return 0;
+    int result = 0;
+    for (PlayingCard *eachCard in otherCards) {
+        result = result + [self compareWith:eachCard];
+    }
+	return result;
+}
+
+-(int) compareWith:(PlayingCard *) otherCard {
+    if ([self.suit isEqualToString:otherCard.suit]) {
+        return 1;
+    }
+    if (self.rank == otherCard.rank) {
+        return 4;
+    }
+    return 0;
 }
 
 
